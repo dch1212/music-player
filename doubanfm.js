@@ -14,6 +14,7 @@ class DoubanFM {
     this.$pause = document.querySelector('.icon-pause')
     this.$prev = document.querySelector('.icon-prev')
     this.$next = document.querySelector('.icon-next')
+    this.$loop = document.querySelector('.icon-loop')
     this.audio = new Audio()
     this.visualizer = new Visualizer('.visualizer', this.audio)
     this.playlist = playlist
@@ -29,6 +30,7 @@ class DoubanFM {
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$next.addEventListener('click', this.next.bind(this))
     this.audio.addEventListener('ended', this.next.bind(this))
+    this.$loop.addEventListener('click',this.loop.bind(this))
     this.audio.addEventListener('timeupdate', this.updateProgress.bind(this))
     this.createPlaylist()
     this.loadAndPlay(0)
@@ -106,7 +108,16 @@ class DoubanFM {
       this.loadAndPlay(this.playlistIndex + 1)
     }
   }
-
+ loop(){
+    if( !this.audio.loop ){
+      this.audio.loop = "loop";
+      
+      this.$loop.parentNode.title = "单曲循环"
+    }else{
+      this.audio.loop = ''
+      this.$loop.parentNode.title = "顺序播放"
+    }
+    
   loadAndPlay(index) {
     this.$playlistItems[this.playlistIndex].classList.remove('active')
     this.playlistIndex = index
