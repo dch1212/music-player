@@ -15,11 +15,12 @@ class DoubanFM {
     this.$prev = document.querySelector('.icon-prev')
     this.$next = document.querySelector('.icon-next')
     this.$loop = document.querySelector('.icon-loop')
+  
     this.audio = new Audio()
     this.visualizer = new Visualizer('.visualizer', this.audio)
     this.playlist = playlist
     this.playlistIndex = 0
-    this.init()
+    this.inppit()
   }
 
   init() {
@@ -29,14 +30,15 @@ class DoubanFM {
     this.$pause.addEventListener('click', this.pause.bind(this))
     this.$prev.addEventListener('click', this.prev.bind(this))
     this.$next.addEventListener('click', this.next.bind(this))
-    this.audio.addEventListener('ended', this.next.bind(this))
     this.$loop.addEventListener('click',this.loop.bind(this))
+    this.audio.addEventListener('ended', this.next.bind(this))
     this.audio.addEventListener('timeupdate', this.updateProgress.bind(this))
     this.createPlaylist()
-    this.loadAndPlay(0)
+     this.loadAndPlay(0)
   }
 
   createPlaylist() {
+    console.log(this)
     this.$playlist.innerHTML = playlist.map((item, index) => {
       return `<div class="doubanfm-playlist-item" data-index="${index}">
         ${index + 1}. ${item.title} - ${item.artist}
@@ -44,13 +46,14 @@ class DoubanFM {
     }).join('')
     this.$playlist.addEventListener('click', event => {
       if (event.target.dataset.index) {
+        
         this.loadAndPlay(parseInt(event.target.dataset.index))
       }
     })
     this.$playlistItems = document.querySelectorAll('.doubanfm-playlist-item')
   }
 
-  setProgress(event) {
+  setProgress(event) {console.log( this.$progress.clientWidth)
     this.audio.currentTime = event.offsetX / this.$progress.clientWidth * this.audio.duration
   }
 
@@ -72,7 +75,7 @@ class DoubanFM {
     this.$progressValue.style.width = (this.audio.currentTime / this.song.length * 100) + '%'
   }
 
-  load() {
+  load() {console.log(this.song)
     this.$title.textContent = this.song.title
     this.$artist.textContent = this.song.artist
     this.$cover.src = this.song.picture
@@ -108,7 +111,7 @@ class DoubanFM {
       this.loadAndPlay(this.playlistIndex + 1)
     }
   }
- loop(){
+  loop(){
     if( !this.audio.loop ){
       this.audio.loop = "loop";
       
@@ -116,7 +119,9 @@ class DoubanFM {
     }else{
       this.audio.loop = ''
       this.$loop.parentNode.title = "顺序播放"
-    }    
+    }
+    
+    
 
   }
   loadAndPlay(index) {
@@ -127,6 +132,7 @@ class DoubanFM {
     this.load()
     this.play()
   }
+  
 }
 
 const app = new DoubanFM()
