@@ -23,7 +23,7 @@ class DoubanFM {
     this.inppit()
   }
 
-  init() {
+  inppit() {
     this.$progress.addEventListener('click', this.setProgress.bind(this))
     this.$volume.addEventListener('click', this.setVolume.bind(this))
     this.$play.addEventListener('click', this.play.bind(this))
@@ -34,7 +34,7 @@ class DoubanFM {
     this.audio.addEventListener('ended', this.next.bind(this))
     this.audio.addEventListener('timeupdate', this.updateProgress.bind(this))
     this.createPlaylist()
-     this.loadAndPlay(0)
+    // this.loadAndPlay(0)
   }
 
   createPlaylist() {
@@ -111,8 +111,7 @@ class DoubanFM {
       this.loadAndPlay(this.playlistIndex + 1)
     }
   }
-
-    loop(){
+  loop(){
     if( !this.audio.loop ){
       this.audio.loop = "loop";
       
@@ -122,7 +121,6 @@ class DoubanFM {
       this.$loop.parentNode.title = "顺序播放"
     }
   }
-  
   loadAndPlay(index) {
     this.$playlistItems[this.playlistIndex].classList.remove('active')
     this.playlistIndex = index
