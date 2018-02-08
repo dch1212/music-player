@@ -116,8 +116,9 @@ class DoubanFM {
     }else{
       this.audio.loop = ''
       this.$loop.parentNode.title = "顺序播放"
-    }
-    }
+    }    
+
+  }
   loadAndPlay(index) {
     this.$playlistItems[this.playlistIndex].classList.remove('active')
     this.playlistIndex = index
