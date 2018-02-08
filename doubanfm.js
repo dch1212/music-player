@@ -20,7 +20,7 @@ class DoubanFM {
     this.visualizer = new Visualizer('.visualizer', this.audio)
     this.playlist = playlist
     this.playlistIndex = 0
-    this.inppit()
+    this.init()
   }
 
   inppit() {
@@ -34,7 +34,7 @@ class DoubanFM {
     this.audio.addEventListener('ended', this.next.bind(this))
     this.audio.addEventListener('timeupdate', this.updateProgress.bind(this))
     this.createPlaylist()
-    // this.loadAndPlay(0)
+     this.loadAndPlay(0)
   }
 
   createPlaylist() {
