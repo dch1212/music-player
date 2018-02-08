@@ -23,7 +23,7 @@ class DoubanFM {
     this.init()
   }
 
-  inppit() {
+  init() {
     this.$progress.addEventListener('click', this.setProgress.bind(this))
     this.$volume.addEventListener('click', this.setVolume.bind(this))
     this.$play.addEventListener('click', this.play.bind(this))
